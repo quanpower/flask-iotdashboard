@@ -1,0 +1,50 @@
+<!-- Static navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('jsondash.dashboard') }}">
+        <img alt="Brand" src="{{url_for('static', filename = 'img/logo.png')}}" height="30" width="30" >
+      </a>
+
+    </div>
+
+    <div class="navbar-header">
+          <h3>
+            <font color="#FFFF00">奥科宁克设施监控系统</font>
+          </h3>
+    </div>
+
+
+        <div class="pull-right">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="{{ url_for('jsondash.view', c_id='c6f34436-f167-11e8-9bf8-9cd21e883d6f') }}">          
+                        <h4>
+                            <font color="#ffffff">地坑</font>
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('jsondash.view', c_id='8331237e-f1eb-11e8-9bf8-9cd21e883d6f') }}">          
+                        <h4>
+                            <font color="#ffffff">油箱</font>
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('jsondash.view', c_id='22655ef0-f1ed-11e8-9bf8-9cd21e883d6f') }}">          
+                        <h4>
+                            <font color="#ffffff">历史记录</font>
+                        </h4>
+                    </a>
+                </li>
+
+
+        </div>
+    </div>
+
+      
+
+
+</nav>
+<!-- /Static navbar -->
