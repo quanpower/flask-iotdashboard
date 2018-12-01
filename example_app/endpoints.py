@@ -22,6 +22,10 @@ from flask import (
 from flask_cors import CORS
 from flask_cors import cross_origin
 
+
+from flask_sqlalchemy import SQLAlchemy
+
+
 app = Flask('endpoints_test')
 CORS(app)
 app.config['SECRET_KEY'] = 'NOTSECURELOL'
@@ -32,6 +36,19 @@ STRESS_MAX_POINTS = 300
 locale.setlocale(locale.LC_ALL, '')
 
 cwd = os.getcwd()
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///daq.db'
+db = SQLAlchemy(app)
+
+
+
+class DAQS(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    channel_id = db.Column(db.String(80), unique=True)
+    daq_value = db.Column(db.Float, unique=True)
+    daq_time = db.Column(db.INTEGER)
+
+    def __repr__(self):
+        return '<DAQS %r>' % self.id
 
 
 def recursive_d3_data(current=0, max_iters=12, data=None):
@@ -420,30 +437,6 @@ def custompage():
 
 
 @cross_origin()
-@app.route('/oil_temperature')
-def oil_temperature():
-    """Fake endpoint."""
-    return render_template('examples/oil_temperature.html')
-
-
-
-@cross_origin()
-@app.route('/oil_level')
-def oil_level():
-    """Fake endpoint."""
-    return render_template('examples/oil_level.html')
-
-
-
-@cross_origin()
-@app.route('/water_level')
-def water_level():
-    """Fake endpoint."""
-    return render_template('examples/water_level.html')
-
-
-
-@cross_origin()
 @app.route('/gauge')
 def gauge():
     """Fake endpoint."""
@@ -716,6 +709,89 @@ def graphdata():
     return jsonify(dict(
         graph=graphdata,
     ))
+
+
+
+@cross_origin()
+@app.route('/daq_value/<channel_id>')
+def daq_value(channel_id):
+    value = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
+
+    return jsonify(value=value.daq_value)
+
+
+
+@cross_origin()
+@app.route('/oil_temperature/<channel_id>')
+def oil_temperature(channel_id):
+    """Fake endpoint."""
+    temperature = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
+    return render_template('examples/oil_temperature.html',channel_id=channel_id)
+
+
+@cross_origin()
+@app.route('/oil_level/<channel_id>')
+def oil_level(channel_id):
+    level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
+
+    return render_template('examples/oil_level.html',channel_id=channel_id)
+
+
+@cross_origin()
+@app.route('/water_level/<channel_id>')
+def water_level(channel_id):
+    level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
+
+    return render_template('examples/water_level.html',channel_id=channel_id)
+
+
+@cross_origin()
+@app.route('/h5video/')
+def h5video():
+
+    return render_template('examples/h5video.html')
+
+
+@cross_origin()
+@app.route('/history_line')
+def history_line():
+    """Fake endpoint."""
+    return_dict = {}
+    for channel_id in range(1,4):
+        all_channels = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).limit(50).all()
+
+        channel_list = []
+        for channel in all_channels:
+            value = channel.daq_value
+            channel_list.append(value)
+        return_dict['line'+str(channel_id)] = channel_list
+    print(return_dict)
+
+    return jsonify(return_dict)
+
+
+
+@cross_origin()
+@app.route('/history_record')
+def history_record():
+    """Fake endpoint."""
+
+    all_channels = DAQS.query.order_by(-DAQS.daq_time).limit(100).all()
+
+    print(all_channels)
+    channel_list = []
+    # for channel in all_channels:
+    #     print(channel.daq_time)
+    #     channel_list.append({
+    #         'id':channel.id,
+    #         'channel_id':channel.channel_id,
+    #         'daq_value':channel.daq_value,
+    #         'daq_time':time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(channel.daq_time))
+    #         })
+        
+    # print(channel_list)
+
+    return jsonify(channel_list)
 
 
 if __name__ == '__main__':

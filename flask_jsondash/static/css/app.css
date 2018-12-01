@@ -30,6 +30,7 @@ body {
     background-color: #2a2a2a;
     border-bottom-width: 2px;
     border-bottom-color: #2a2a2a;
+    color: #05a8f9;
     /*
     set to relative initially, before layout is calculated.
     this ensures any elements positioned absolutely work as expected.

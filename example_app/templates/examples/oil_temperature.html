@@ -2,12 +2,24 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <!-- 引入 Jquery 文件 -->
+
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/vendor/jquery.min.js') }}">
+    </script>
     <!-- 引入 ECharts 文件 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.min.js"></script>
+
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/vendor/echarts-en.min.js') }}">
+    </script>
 </head>
 <body>
     <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
     <div id="main" style="width: 260px;height:220px;"></div>
+
+    <script type="text/javascript">
+     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
@@ -91,9 +103,15 @@ var option = {
 };
 
 setInterval(function (){
-    option.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
-    myChart.setOption(option);
-},2000)
+                //异步加载数据
+                $(function(){
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
+                        option.series[0].data[0].value = data.value.toFixed(2) - 0;
+                        myChart.setOption(option);
+
+                    });
+                });
+},5000)
 
 
 

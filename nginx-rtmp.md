@@ -150,4 +150,4 @@ ffmpeg -re -i /home/quanpower/Downloads/xvideos.com_40178813ef6381d45823e48b63f5
 
 ffmpeg -re -i rtsp:// -c copy -f flv rtmp://localhost:1935/live/film
 
-ffmpeg -i "rtsp://admin:shuhang2018@192.168.1.64:554/h265/ch1/main/av_stream" -f flv -r 25 -s 640x360 -an rtmp://localhost:1935/live/room
+ffmpeg -i "rtsp://admin:shuhang2018@192.168.1.64:554/h264/ch1/main/av_stream" -f flv -r 25 -s 640x360 -an rtmp://localhost:1935/live/room
