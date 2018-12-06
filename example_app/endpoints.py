@@ -757,6 +757,7 @@ def h5video():
 def history_line():
     """Fake endpoint."""
     return_dict = {}
+    line_name = ['line0','oil_temperature','oil_level','water_level']
     for channel_id in range(1,4):
         all_channels = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).limit(50).all()
 
@@ -764,7 +765,8 @@ def history_line():
         for channel in all_channels:
             value = channel.daq_value
             channel_list.append(value)
-        return_dict['line'+str(channel_id)] = channel_list
+            channel_list.reverse()
+        return_dict[line_name[channel_id]] = channel_list
     print(return_dict)
 
     return jsonify(return_dict)

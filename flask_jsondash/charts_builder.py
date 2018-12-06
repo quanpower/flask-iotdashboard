@@ -44,7 +44,7 @@ charts = Blueprint(
     'jsondash',
     __name__,
     template_folder=TEMPLATE_DIR,
-    static_url_path=STATIC_DIR,
+    static_url_path='/static/',
     static_folder=STATIC_DIR,
 )
 

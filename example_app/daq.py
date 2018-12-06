@@ -62,7 +62,9 @@ while True:
         pmin = ai_range_list[i]['pmin']
         print(pmax)
         print(pmin)
-        ai_value = ((pmax-pmin)/40000)*(ai_int - 10000) + pmin
+        ai_value = round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2)
+        if i == 1:
+            ai_value = (ai_value+150)/10
 
         insert_daq_sql='''INSERT INTO DAQS (id, channel_id,daq_value,daq_time) VALUES(null, {0},{1},{2});'''.format(i+1, ai_value, int(time.time()))
         print(insert_daq_sql)

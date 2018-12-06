@@ -31,8 +31,67 @@ var option = {
         {
             name: 'temp',
             type: 'gauge',
-            detail: {formatter:'{value}'},
-            data: [{value: 50, name: 'mm'}]
+            endAngle:35,
+            min:0,
+            max:100,
+            splitNumber:10,
+            radius: '100%',
+            axisLine: {            // 坐标轴线
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    color: [[0.60, '#ff0000'],[0.80, '#00ff00'],[1, '#ff0000']],
+                    width: 3,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 10
+                }
+            },
+
+
+            axisLabel: {            // 坐标轴小标记
+                textStyle: {       // 属性lineStyle控制线条样式
+                    fontWeight: 'bolder',
+                    color: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 10
+                }
+            },
+            axisTick: {            // 坐标轴小标记
+                length :15,        // 属性length控制线长
+                lineStyle: {       // 属性lineStyle控制线条样式
+                    color: 'auto',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 10
+                }
+            },
+            splitLine: {           // 分隔线
+                length :25,         // 属性length控制线长
+                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                    width:3,
+                    color: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 10
+                }
+            },
+            pointer: {           // 分隔线
+                shadowColor : '#fff', //默认透明
+                shadowBlur: 5
+            },
+            title : {
+                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                    fontWeight: 'bolder',
+                    fontSize: 10,
+                    fontStyle: 'italic',
+                    color: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                }
+            },
+
+            detail : {
+
+                offsetCenter: [0, '70%'],       // x, y，单位px
+
+            },
+            data: [{value: 50, name: 'cm'}]
         }
     ]
 };
@@ -41,7 +100,7 @@ setInterval(function () {
                 //异步加载数据
                 $(function(){
                     $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(2) - 0;
+                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
                         myChart.setOption(option);
 
                     });
