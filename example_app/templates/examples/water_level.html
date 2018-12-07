@@ -36,6 +36,8 @@
                     type: 'gauge',
                     min:0,
                     max:100,
+                    endAngle:35,
+
                     splitNumber:10,
                     radius: '100%',
                     axisLine: {            // 坐标轴线
@@ -91,9 +93,10 @@
                     detail : {
 
                         offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} mm',
 
                     },
-                    data: [{value: 50, name: 'mm'}]
+                    data: [{value: 50, name: ''}]
                         }
             ]
         };
@@ -103,7 +106,7 @@
                 //异步加载数据
                 $(function(){
                     $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(2) - 0;
+                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
                         myChart.setOption(option);
 
                     });

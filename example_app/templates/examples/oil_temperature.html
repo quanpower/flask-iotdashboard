@@ -88,9 +88,11 @@ var option = {
             detail : {
 
                 offsetCenter: [0, '70%'],       // x, y，单位px
+                formatter:'{value} ℃',
+
 
             },
-            data:[{value: 40, name: '℃'}]
+            data:[{value: 40, name: ''}]
         },
     ]
 };
@@ -99,7 +101,7 @@ setInterval(function (){
                 //异步加载数据
                 $(function(){
                     $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(2) - 0;
+                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
                         myChart.setOption(option);
 
                     });

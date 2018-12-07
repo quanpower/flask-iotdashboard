@@ -127,7 +127,7 @@
 <div class="row">
     <div class="col-md-12">
         {% if not embeddable %}
-            <h2 class="chart-header lead text-center">
+            <h3 class="chart-header lead text-center">
                 {% if not demo_mode %}
                     <small>
                         <a href="{{ url_for('jsondash.dashboard') }}" class="btn-xs btn btn-default pull-left">
@@ -136,12 +136,12 @@
                     </small>
                 {% endif %}
 
-                <span class="pull-left">{{ view.name }}</span>
+                <span class="text-center"><font color="#ffffff">{{ view.name }}</font></span>
 
                 {% if can_edit and not demo_mode %}
                     <small>{% include "partials/dashboard-options.html" %}</small>
                 {% endif %}
-            </h2>
+            </h3>
         {% endif %}
         {% if can_edit and not demo_mode and not embeddable %}
             <div class="{{ 'collapse' if view.modules|length else '' }} edit-mode-component" id="edit-view-container">
