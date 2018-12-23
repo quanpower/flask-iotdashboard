@@ -17,16 +17,16 @@ cursor = conn.cursor()
 # print('insert ok!')
 
 
-sql1= '''INSERT INTO CHANNELS (id,channel_name,pmax,pmin,high_limit,low_limit,unit) VALUES (NULL,'oil_temperature_1',{0},{1},{2},{3},'mm');'''.format(100,0,60,10,)
+sql1= '''INSERT INTO CHANNELS (id,channel_name,pmax,pmin,high_limit,low_limit,unit) VALUES (NULL,'oil_temperature_1',{0},{1},{2},{3},'oc');'''.format(100,0,50,10,)
 print(sql1)
 cursor.execute(sql1)
 
 
-sql2= '''INSERT INTO CHANNELS (id,channel_name,pmax,pmin,high_limit,low_limit,unit) VALUES (NULL,'oil_level_1',{0},{1},{2},{3},'mm');'''.format(800,0,600,100,)
+sql2= '''INSERT INTO CHANNELS (id,channel_name,pmax,pmin,high_limit,low_limit,unit) VALUES (NULL,'oil_level_1',{0},{1},{2},{3},'mm');'''.format(1000,0,800,600,)
 print(sql2)
 cursor.execute(sql2)
 
-sql3= '''INSERT INTO CHANNELS (id,channel_name,pmax,pmin,high_limit,low_limit,unit) VALUES (NULL,'water_level_1',{0},{1},{2},{3},'mm');'''.format(1000,0,600,100,)
+sql3= '''INSERT INTO CHANNELS (id,channel_name,pmax,pmin,high_limit,low_limit,unit) VALUES (NULL,'water_level_1',{0},{1},{2},{3},'mm');'''.format(1000,0,200,100,)
 print(sql3)
 cursor.execute(sql3)
 

@@ -63,8 +63,7 @@ while True:
         print(pmax)
         print(pmin)
         ai_value = round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2)
-        if i == 1:
-            ai_value = (ai_value+150)/10
+
 
         insert_daq_sql='''INSERT INTO DAQS (id, channel_id,daq_value,daq_time) VALUES(null, {0},{1},{2});'''.format(i+1, ai_value, int(time.time()))
         print(insert_daq_sql)
@@ -91,7 +90,7 @@ while True:
     print(ai_int_list)
     print(ai_value_list)
 
-    time.sleep(10)
+    time.sleep(5)
 
 tcpClient.close()
 conn.close()

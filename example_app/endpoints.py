@@ -18,6 +18,7 @@ from flask import (
     request,
     jsonify,
     render_template,
+    flash,
 )
 from flask_cors import CORS
 from flask_cors import cross_origin
@@ -741,7 +742,7 @@ def oil_level(channel_id):
 @app.route('/water_level/<channel_id>')
 def water_level(channel_id):
     level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
-
+    flash('water_level error', 'error')
     return render_template('examples/water_level.html',channel_id=channel_id)
 
 
@@ -778,23 +779,33 @@ def history_line():
 def history_record():
     """Fake endpoint."""
 
-    all_channels = DAQS.query.order_by(-DAQS.daq_time).limit(100).all()
+    all_channels = DAQS.query.order_by(-DAQS.daq_time).limit(2000).all()
 
     print(all_channels)
     channel_list = []
-    # for channel in all_channels:
-    #     print(channel.daq_time)
-    #     channel_list.append({
-    #         'id':channel.id,
-    #         'channel_id':channel.channel_id,
-    #         'daq_value':channel.daq_value,
-    #         'daq_time':time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(channel.daq_time))
-    #         })
+    for channel in all_channels:
+        print(channel.daq_time)
+        channel_list.append({
+            'id':channel.id,
+            'channel_id':channel.channel_id,
+            'daq_value':channel.daq_value,
+            'daq_time':time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(channel.daq_time))
+            })
         
-    # print(channel_list)
+    print(channel_list)
 
     return jsonify(channel_list)
 
+
+@cross_origin()
+@app.route('/waring')
+def waring():
+    """Fake endpoint."""
+    return_dict = {"message":"alarm error", "catgory":"error", "status":0}
+
+    print(return_dict)
+
+    return jsonify(return_dict)
 
 if __name__ == '__main__':
     PORT = int(os.getenv('PORT', 5004))

@@ -38,18 +38,65 @@
                 </li>
 
                 <li>
-                    <span class="label label-success">Running</span>
+                    <span id="waring" >Running</span>
 <!--                     <span class="label label-warning">Warning</span>
                     <span class="label label-danger">Danger</span> -->
                 </li>
         </div>
-<!-- 
-        <audio src="{{ url_for('static', filename = '10426.wav') }}" controls="controls" >
-        </audio> -->
+
+        <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" controls="controls" autoplay >
+        </audio>
 
 
-<!--         <audio src="{{ url_for('static', filename = '10426.wav') }}" controls="controls" >
-        </audio> -->
+
     </div>
 
 </nav>
+
+<script type="text/javascript">
+    
+    
+     //setInterval配合ajax实现实时刷新前台数据的功能
+
+        setInterval(function () {
+
+            $.ajax({
+                type: "get",
+                url: "http://localhost:5004/waring",
+                success: function (msg) {
+    if (msg.status == 1){
+        $("#waring").html("error");
+        $("#waring").addClass("label label-danger");
+        $("#waring").removeClass("label-success");
+        $("#waring").css({"font-size":"200%"});
+
+
+        var audio = $("#audio_alarm")[0];
+        audio.play();
+
+    }
+    else{
+        $("#waring").html("Running");
+        $("#waring").addClass("label label-success");
+        $("#waring").removeClass("label-danger");
+
+        $("#waring").css({"font-size":"200%"});
+        var audio = $("#audio_alarm")[0];
+        audio.pause();
+
+    }
+                    
+                },
+
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    alert("错误信息;" + XmlHttpRequest.status);
+                }
+
+            })
+
+        }
+, 1000)
+
+                   
+    </script>
+
