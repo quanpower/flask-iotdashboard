@@ -801,10 +801,23 @@ def history_record():
 @app.route('/waring')
 def waring():
     """Fake endpoint."""
-    return_dict = {"message":"alarm error", "catgory":"error", "status":0}
+    value_1 = DAQS.query.filter_by(channel_id=1).order_by(-DAQS.daq_time).first()
 
+    value_2 = DAQS.query.filter_by(channel_id=2).order_by(-DAQS.daq_time).first()
+    print(value_2)
+    print(value_2.daq_value)
+
+    value_3 = DAQS.query.filter_by(channel_id=3).order_by(-DAQS.daq_time).first()
+
+
+    if value_2.daq_value > 800:
+        return_dict = {"message":"oil level  > high limit", "catgory":"error", "status":1}
+    elif value_2.daq_value < 600:
+        return_dict = {"message":"oil level  < low limit", "catgory":"error", "status":1}
+    else:
+        return_dict = {"message":"alarm error", "catgory":"error", "status":0}
     print(return_dict)
-
+    # return_dict = {"message":"alarm error", "catgory":"error", "status":1}
     return jsonify(return_dict)
 
 if __name__ == '__main__':

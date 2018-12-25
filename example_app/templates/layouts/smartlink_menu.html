@@ -44,9 +44,10 @@
                 </li>
         </div>
 
-        <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" controls="controls" autoplay >
+        <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" autoplay >
         </audio>
-
+<!--         <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" controls="controls" autoplay >
+        </audio> -->
 
 
     </div>
@@ -64,32 +65,32 @@
                 type: "get",
                 url: "http://localhost:5004/waring",
                 success: function (msg) {
-    if (msg.status == 1){
-        $("#waring").html("error");
-        $("#waring").addClass("label label-danger");
-        $("#waring").removeClass("label-success");
-        $("#waring").css({"font-size":"200%"});
+                    if (msg.status == 1){
+                        $("#waring").html("error");
+                        $("#waring").addClass("label label-danger");
+                        $("#waring").removeClass("label-success");
+                        $("#waring").css({"font-size":"200%"});
 
 
-        var audio = $("#audio_alarm")[0];
-        audio.play();
+                        var audio = $("#audio_alarm")[0];
+                        audio.play();
 
-    }
-    else{
-        $("#waring").html("Running");
-        $("#waring").addClass("label label-success");
-        $("#waring").removeClass("label-danger");
+                    }
+                    else{
+                        $("#waring").html("Running");
+                        $("#waring").addClass("label label-success");
+                        $("#waring").removeClass("label-danger");
 
-        $("#waring").css({"font-size":"200%"});
-        var audio = $("#audio_alarm")[0];
-        audio.pause();
+                        $("#waring").css({"font-size":"200%"});
+                        var audio = $("#audio_alarm")[0];
+                        audio.pause();
 
-    }
+                    }
                     
                 },
 
                 error: function (XmlHttpRequest, textStatus, errorThrown) {
-                    alert("错误信息;" + XmlHttpRequest.status);
+                    console.log("错误信息;" + XmlHttpRequest.status);
                 }
 
             })
