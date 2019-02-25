@@ -18,6 +18,10 @@
 <body>
 
 <!-- body -->
+<!-- VENDOR JS -->
+
+<script src="{{ url_for('static', filename='js/vendor/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
 
     {% include 'layouts/menu3.html' %}
     <div class="container-fluid" style="margin-top: 50px;" >
@@ -31,10 +35,7 @@
         </div>
     </div>
 
-<!-- VENDOR JS -->
 
-<script src="{{ url_for('static', filename='js/vendor/jquery.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/vendor/bootstrap.min.js') }}"></script>
 
 
 {% include 'layouts/smartlink_footer.html' %}
