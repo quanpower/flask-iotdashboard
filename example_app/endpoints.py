@@ -754,6 +754,22 @@ def h5video():
 
 
 @cross_origin()
+@app.route('/h5video2/')
+def h5video2():
+
+    return render_template('examples/h5video2.html')
+
+
+
+@cross_origin()
+@app.route('/h5video3/')
+def h5video3():
+
+    return render_template('examples/h5video3.html')
+
+
+
+@cross_origin()
 @app.route('/history_line')
 def history_line():
     """Fake endpoint."""
