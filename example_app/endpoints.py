@@ -820,6 +820,24 @@ def waring():
     # return_dict = {"message":"alarm error", "catgory":"error", "status":1}
     return jsonify(return_dict)
 
+
+@cross_origin()
+@app.route('/hole/<channel_id>')
+def hole(channel_id):
+
+    return render_template('examples/hole2.html',channel_id=channel_id)
+
+
+@cross_origin()
+@app.route('/oil2/<channel_id>')
+def oil(channel_id):
+    # level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
+
+    return render_template('examples/oil2.html',channel_id=channel_id)
+
+
+
+
 if __name__ == '__main__':
     PORT = int(os.getenv('PORT', 5004))
     HOST = os.getenv('HOST', '0.0.0.0')

@@ -1,0 +1,109 @@
+<nav class="navbar navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="{{url_for('static', filename = 'img/logo.png')}}" height="30" width="30" >
+      </a>
+
+    </div>
+
+    <div class="navbar-header">
+          <h3>
+            <font color="#FFFF00">奥科宁克设施监控系统</font>
+          </h3>
+    </div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="http://127.0.0.1:7777/charts/eb615ac2-f6c5-11e8-9da1-d45ddf0512d7?jsondash_demo_mode=1">          
+                        <h4>
+                            <font color="#ffffff">地坑</font>
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://127.0.0.1:7777/charts/ca95288a-f6c6-11e8-a9b4-d45ddf0512d7?jsondash_demo_mode=1">          
+                        <h4>
+                            <font color="#ffffff">油箱</font>
+                        </h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://127.0.0.1:7777/charts/cf20398c-f6c7-11e8-9133-d45ddf0512d7?jsondash_demo_mode=1">          
+                        <h4>
+                            <font color="#ffffff">历史记录</font>
+                        </h4>
+                    </a>
+                </li>
+
+
+              <li class="active"><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>                            
+              <li><a href="tables.html"><i class="icon-th icon-white"></i> Tables</a></li>
+              <li><a href="login.html"><i class="icon-lock icon-white"></i> Login</a></li>
+              <li><a href="user.html"><i class="icon-user icon-white"></i> User</a></li>
+
+                <li>
+                    <span id="waring" >Running</span>
+<!--                     <span class="label label-warning">Warning</span>
+                    <span class="label label-danger">Danger</span> -->
+                </li>
+        </div>
+
+        <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" autoplay >
+        </audio>
+<!--         <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" controls="controls" autoplay >
+        </audio> -->
+
+    </div>
+
+</nav>
+<!-- 
+<script type="text/javascript">
+    
+    
+     //setInterval配合ajax实现实时刷新前台数据的功能
+
+        setInterval(function () {
+
+            $.ajax({
+                type: "get",
+                url: "http://localhost:5004/waring",
+                success: function (msg) {
+                    if (msg.status == 1){
+                        $("#waring").html("error");
+                        $("#waring").addClass("label label-danger");
+                        $("#waring").removeClass("label-success");
+                        $("#waring").css({"font-size":"200%"});
+
+
+                        var audio = $("#audio_alarm")[0];
+                        audio.play();
+
+                    }
+                    else{
+                        $("#waring").html("Running");
+                        $("#waring").addClass("label label-success");
+                        $("#waring").removeClass("label-danger");
+
+                        $("#waring").css({"font-size":"200%"});
+                        var audio = $("#audio_alarm")[0];
+                        audio.pause();
+
+                    }
+                    
+                },
+
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    console.log("错误信息;" + XmlHttpRequest.status);
+                }
+
+            })
+
+        }
+, 1000)
+
+                   
+    </script>
+
+ -->

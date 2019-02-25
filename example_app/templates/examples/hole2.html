@@ -1,0 +1,627 @@
+{% extends "layouts/base3.html" %}
+
+
+{% block aknk_css %}
+{{ super() }}
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/font-awesome.css') }}">
+
+<link rel = "stylesheet" type = "text/css" href = "{{
+        url_for('static', filename='css/h5splayer.css') }}" />
+
+<!-- APP CSS -->
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/overrides.css') }}"> -->
+
+{% endblock %}
+
+{% block aknk_js %}
+{{ super() }}
+<!-- VENDOR JS -->
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/vendor/echarts-en.min.js') }}">
+    </script>
+
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/adapter.js') }}">
+    </script>
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/platform.js') }}">
+    </script>
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/h5splayer.js') }}">
+    </script>
+
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/h5splayerhelper.js') }}">
+    </script>
+
+
+{% endblock %}
+
+{% block aknk_body %}
+{{ super() }}
+
+    <div class="container">
+
+      <!-- FIRST ROW OF BLOCKS -->     
+      <div class="row">
+
+      <!-- USER PROFILE BLOCK -->
+        <div class="col-sm-3 col-lg-3">
+            <div class="dash-unit">
+                <dtitle>water level 1</dtitle>
+                <hr>
+                <div id="water1" style="width: 260px;height:260px;">
+                    
+                </div>
+                </div>
+        </div>
+
+      <!-- DONUT CHART BLOCK -->
+        <div class="col-sm-3 col-lg-3">
+            <div class="dash-unit">
+                <dtitle>water level 2</dtitle>
+                <hr>
+                <div id="water2" style="width: 260px;height:260px;">
+                    
+                </div>
+                </div>
+        </div>
+
+      <!-- DONUT CHART BLOCK -->
+        <div class="col-sm-3 col-lg-3">
+            <div class="dash-unit">
+                <dtitle>water level 3</dtitle>
+                <hr>
+                <div id="water3" style="width: 260px;height:260px;">
+                    
+                </div>
+                </div>
+        </div>
+
+
+        <div class="col-sm-3 col-lg-3">
+
+      <!-- LOCAL TIME BLOCK -->
+            <div class="half-unit">
+                <dtitle>Local Time</dtitle>
+                <hr>
+                    <div class="clockcenter">
+                        <digiclock>12:45:25</digiclock>
+                    </div>
+            </div>
+
+      <!-- SERVER UPTIME -->
+            <div class="half-unit">
+                <dtitle>Server Uptime</dtitle>
+                <hr>
+                <div class="cont">
+                    <p><img src="images/up.png" alt=""> <bold>Up</bold> | 356ms.</p>
+                </div>
+            </div>
+
+        </div>
+      </div><!-- /row -->
+      
+      
+      <!-- SECOND ROW OF BLOCKS -->     
+      <div class="row">
+        <div class="col-sm-3 col-lg-3">
+       <!-- MAIL BLOCK -->
+            <div class="dash-unit">
+            <dtitle>Inbox (1)</dtitle>
+            <hr>
+            <div class="h5videodiv">
+                <video class="h5video" id="h5sVideo1"  autoplay webkit-playsinline playsinline>
+
+                </video>
+                <div class="playpause" id="playpause1" ></div>
+            </div>
+        </div><!-- /dash-unit -->
+    </div><!-- /span3 -->
+
+      <!-- GRAPH CHART - lineandbars.js file -->     
+        <div class="col-sm-3 col-lg-3">
+            <div class="dash-unit">
+            <dtitle>Other Information</dtitle>
+            <hr>
+            <div class="h5videodiv">
+                <video class="h5video" id="h5sVideo2"  autoplay webkit-playsinline playsinline>
+
+                </video>
+                <div class="playpause" id="playpause2" ></div>
+            </div>
+            </div>
+        </div>
+
+      <!-- LAST MONTH REVENUE -->     
+        <div class="col-sm-3 col-lg-3">
+            <div class="dash-unit">
+                <dtitle>Last Month Revenue</dtitle>
+                <hr>
+
+            <div class="h5videodiv">
+                <video class="h5video" id="h5sVideo3"  autoplay webkit-playsinline playsinline>
+
+                </video>
+                <div class="playpause" id="playpause3" ></div>
+            </div>
+            </div>
+        </div>
+        
+      <!-- 30 DAYS STATS - CAROUSEL FLEXSLIDER -->     
+        <div class="col-sm-3 col-lg-3">
+            <div class="dash-unit">
+                <dtitle>Last 30 Days Stats</dtitle>
+                <hr>
+                <br>
+                <br>
+
+                <div class="cont">
+                    <p>StatCounter Information</p>
+                </div>   
+            </div>
+        </div>
+      </div><!-- /row -->
+     
+ 
+    
+      
+    </div> <!-- /container -->
+
+
+
+    <script type="text/javascript">
+     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_water1 = echarts.init(document.getElementById('water1'));
+
+        var option_water1 = {
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+
+            series: [
+                {
+                    name: 'temp',
+                    type: 'gauge',
+                    min:0,
+                    max:100,
+                    endAngle:35,
+
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.20, '#00ff00'],[0.30, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+
+
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} cm',
+
+                    },
+                    data: [{value: 50, name: ''}]
+                        }
+            ]
+        };
+
+        setInterval(function () {
+                //异步加载数据
+                $(function(){
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/1',function (data) {
+                        option_water1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_water1.setOption(option_water1);
+
+                    });
+                });
+
+        },5000);
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_water2 = echarts.init(document.getElementById('water2'));
+
+        var option_water2 = {
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+
+            series: [
+                {
+                    name: 'temp',
+                    type: 'gauge',
+                    min:0,
+                    max:100,
+                    endAngle:35,
+
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.20, '#00ff00'],[0.30, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+
+
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} cm',
+
+                    },
+                    data: [{value: 50, name: ''}]
+                        }
+            ]
+        };
+
+        setInterval(function () {
+                //异步加载数据
+                $(function(){
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/4',function (data) {
+                        option_water2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_water2.setOption(option_water2);
+
+                    });
+                });
+
+        },5000);
+
+    </script>
+
+
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_water3 = echarts.init(document.getElementById('water3'));
+
+        var option_water3 = {
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+
+            series: [
+                {
+                    name: 'temp',
+                    type: 'gauge',
+                    min:0,
+                    max:100,
+                    endAngle:35,
+
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.20, '#00ff00'],[0.30, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+
+
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} cm',
+
+                    },
+                    data: [{value: 50, name: ''}]
+                        }
+            ]
+        };
+
+        setInterval(function () {
+                //异步加载数据
+                $(function(){
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/5',function (data) {
+                        option_water3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_water3.setOption(option_water3);
+
+                    });
+                });
+
+        },5000);
+
+    </script>
+
+
+
+<script>
+
+if (H5siOS() === true
+    || H5sSafariBrowser() === true)
+{
+    $('#h5sVideo1').prop("controls", true);
+
+}
+
+var conf1 = {
+    videoid:'h5sVideo1',
+    protocol: window.location.protocol, //http: or https:
+    // host: window.location.host, //localhost:8080
+    host: 'localhost:8888',
+    rootpath:'/', // '/' or window.location.pathname
+    token:'token1',
+    hlsver:'v1', //v1 is for ts, v2 is for fmp4
+    session:'c1782caf-b670-42d8-ba90-2244d0b0ee83' //session got from login
+};
+
+
+var v1 = H5sPlayerCreate(conf1);
+
+
+$('#h5sVideo1').parent().click(function () {
+    if($(this).children(".h5video").get(0).paused){
+        $(this).children(".h5video").get(0).play();
+        if(v1 != null)
+        {
+            v1.disconnect();
+            delete v1;
+            v1 = null;
+        }
+
+        v1 = H5sPlayerCreate(conf1);
+        
+        console.log(v1);
+        v1.connect();
+        
+        $(this).children(".playpause").fadeOut();
+    }else{
+        v1.disconnect();
+        delete v1;
+        v1 = null;
+        $(this).children(".h5video").get(0).pause();
+        $(this).children(".playpause").fadeIn();
+    }
+});
+
+</script>
+
+
+
+<script>
+
+if (H5siOS() === true
+    || H5sSafariBrowser() === true)
+{
+    $('#h5sVideo2').prop("controls", true);
+
+}
+
+var conf2 = {
+    videoid:'h5sVideo2',
+    protocol: window.location.protocol, //http: or https:
+    // host: window.location.host, //localhost:8080
+    host: 'localhost:8888',
+    rootpath:'/', // '/' or window.location.pathname
+    token:'token2',
+    hlsver:'v1', //v1 is for ts, v2 is for fmp4
+    session:'c1782caf-b670-42d8-ba90-2244d0b0ee83' //session got from login
+};
+
+
+var v2 = H5sPlayerCreate(conf2);
+
+
+$('#h5sVideo2').parent().click(function () {
+    if($(this).children(".h5video").get(0).paused){
+        $(this).children(".h5video").get(0).play();
+        if(v2 != null)
+        {
+            v2.disconnect();
+            delete v2;
+            v2 = null;
+        }
+
+        v2 = H5sPlayerCreate(conf2);
+        
+        console.log(v2);
+        v2.connect();
+        
+        $(this).children(".playpause").fadeOut();
+    }else{
+        v2.disconnect();
+        delete v2;
+        v2 = null;
+        $(this).children(".h5video").get(0).pause();
+        $(this).children(".playpause").fadeIn();
+    }
+});
+
+</script>
+
+
+<script>
+
+if (H5siOS() === true
+    || H5sSafariBrowser() === true)
+{
+    $('#h5sVideo3').prop("controls", true);
+
+}
+
+var conf3 = {
+    videoid:'h5sVideo3',
+    protocol: window.location.protocol, //http: or https:
+    // host: window.location.host, //localhost:8080
+    host: 'localhost:8888',
+    rootpath:'/', // '/' or window.location.pathname
+    token:'token3',
+    hlsver:'v1', //v1 is for ts, v2 is for fmp4
+    session:'c1782caf-b670-42d8-ba90-2244d0b0ee83' //session got from login
+};
+
+
+var v3 = H5sPlayerCreate(conf3);
+
+
+$('#h5sVideo1').parent().click(function () {
+    if($(this).children(".h5video").get(0).paused){
+        $(this).children(".h5video").get(0).play();
+        if(v3 != null)
+        {
+            v3.disconnect();
+            delete v3;
+            v3 = null;
+        }
+
+        v3 = H5sPlayerCreate(conf3);
+        
+        console.log(v3);
+        v3.connect();
+        
+        $(this).children(".playpause").fadeOut();
+    }else{
+        v3.disconnect();
+        delete v3;
+        v3 = null;
+        $(this).children(".h5video").get(0).pause();
+        $(this).children(".playpause").fadeIn();
+    }
+});
+
+</script>
+
+
+
+{% endblock %}
+

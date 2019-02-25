@@ -18,6 +18,9 @@
     </div>
 {% endmacro -%}
 
+
+
+
 {# Macro to create a new chart template or existing chart from a config #}
 {%- macro chart(module=None) %}
     {% if module %}
@@ -123,6 +126,8 @@
         {% endif %}
 {% endmacro -%}
 
+
+
 {% block chart_body %}
 <div class="row">
     <div class="col-md-12">
@@ -143,6 +148,7 @@
                 {% endif %}
             </h3>
         {% endif %}
+
         {% if can_edit and not demo_mode and not embeddable %}
             <div class="{{ 'collapse' if view.modules|length else '' }} edit-mode-component" id="edit-view-container">
                 {% if not view.modules|length %}
@@ -158,6 +164,7 @@
             </div>
             {% include "partials/dashboard-json-form.html" %}
         {% endif %}
+
         <div class="layout" data-layout="{{ view.layout or 'freeform' }}" id="view-builder">
             <div id="container" class="text-center">
                 {% if view.layout == 'grid' %}
@@ -187,6 +194,7 @@
                 {% endif %}
             </div>
         </div>
+
         {# Used as a template to clone from in js only #}
         <div class="hidden" id="chart-template">{{ chart() }}</div>
         <div class="hidden" id="row-template">{{ chart_row(0) }}</div>
