@@ -220,7 +220,7 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/1', function (data) {
                                 option_oil_temp_1.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_1.setOption(option_oil_temp_1);
 
@@ -312,7 +312,7 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/6', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/4', function (data) {
                                 option_oil_temp_2.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 option_oil_temp_2.setOption(option_oil_temp_2);
 
@@ -404,7 +404,7 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/1', function (data) {
                                 option_oil_temp_3.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_3.setOption(option_oil_temp_3);
 
@@ -496,7 +496,7 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/6', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/4', function (data) {
                                 _oil_temp_4.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_4.setOption(_oil_temp_4);
 
@@ -592,7 +592,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/3', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
                         option_oil_level_1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_1.setOption(option_oil_level_1);
 
@@ -688,7 +688,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/7', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/5', function (data) {
                         option_oil_level_2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_2.setOption(option_oil_level_2);
 
@@ -784,7 +784,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/3', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
                         option_oil_level_3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_3.setOption(option_oil_level_3);
 
@@ -880,7 +880,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/7', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/5', function (data) {
                         option_oil_level_4.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_4.setOption(option_oil_level_4);
 
@@ -893,35 +893,35 @@
 
     <script>
     $("#oil_temp_1").click(function(){
-        location.href='/daq_value/2';
+        location.href='/daq_value/1';
     });
 
     $("#oil_temp_2").click(function(){
-        location.href='/daq_value/6';
+        location.href='/daq_value/4';
     });
 
     $("#oil_temp_3").click(function(){
-        location.href='/daq_value/2';
+        location.href='/daq_value/1';
     });
 
     $("#oil_temp_4").click(function(){
-        location.href='/daq_value/6';
+        location.href='/daq_value/4';
     });
 
     $("#oil_level_1").click(function(){
-        location.href='/daq_value/3';
+        location.href='/daq_value/2';
     });
 
     $("#oil_level_2").click(function(){
-        location.href='/daq_value/7';
+        location.href='/daq_value/5';
     });
 
     $("#oil_level_3").click(function(){
-        location.href='/daq_value/3';
+        location.href='/daq_value/2';
     });
 
     $("#oil_level_4").click(function(){
-        location.href='/daq_value/7';
+        location.href='/daq_value/5';
     });
 </script>
 

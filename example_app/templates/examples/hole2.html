@@ -260,7 +260,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/1',function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/3',function (data) {
                         option_water1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_water1.setOption(option_water1);
 
@@ -356,7 +356,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/4',function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/6',function (data) {
                         option_water2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_water2.setOption(option_water2);
 
@@ -452,7 +452,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/5',function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/7',function (data) {
                         option_water3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_water3.setOption(option_water3);
 
@@ -636,15 +636,15 @@ $('#h5sVideo3').parent().click(function () {
     });
 
     $("#water1").click(function(){
-        location.href='/daq_value/1';
+        location.href='/daq_value/3';
     });
 
     $("#water2").click(function(){
-        location.href='/daq_value/4';
+        location.href='/daq_value/6';
     });
 
     $("#water3").click(function(){
-        location.href='/daq_value/5';
+        location.href='/daq_value/7';
     });
 </script>
 
