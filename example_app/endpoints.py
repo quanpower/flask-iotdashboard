@@ -840,7 +840,7 @@ def waring():
 @app.route('/hole')
 def hole():
 
-    return render_template('examples/hole2.html')
+    return render_template('examples/hole.html')
 
 
 @cross_origin()
@@ -848,7 +848,7 @@ def hole():
 def oil():
     # level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
 
-    return render_template('examples/oil2.html')
+    return render_template('examples/oil.html')
 
 
 
