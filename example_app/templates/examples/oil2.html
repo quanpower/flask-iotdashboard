@@ -36,9 +36,9 @@
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 1</dtitle>
+                <dtitle>oil_temp_1</dtitle>
                 <hr>
-                <div id="water1" style="width: 260px;height:260px;">
+                <div id="oil_temp_1" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -47,9 +47,9 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 2</dtitle>
+                <dtitle>oil_temp_2</dtitle>
                 <hr>
-                <div id="water2" style="width: 260px;height:260px;">
+                <div id="oil_temp_2" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -58,9 +58,9 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 3</dtitle>
+                <dtitle>oil_temp_3</dtitle>
                 <hr>
-                <div id="water3" style="width: 260px;height:260px;">
+                <div id="oil_temp_3" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -70,9 +70,9 @@
         <div class="col-sm-3 col-lg-3">
 
             <div class="dash-unit">
-                <dtitle>water level 3</dtitle>
+                <dtitle>oil_temp_4</dtitle>
                 <hr>
-                <div id="water3" style="width: 260px;height:260px;">
+                <div id="oil_temp_4" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -87,9 +87,9 @@
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 1</dtitle>
+                <dtitle>oil_level_1</dtitle>
                 <hr>
-                <div id="water1" style="width: 260px;height:260px;">
+                <div id="oil_level_1" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -98,9 +98,9 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 2</dtitle>
+                <dtitle>oil_level_2</dtitle>
                 <hr>
-                <div id="water2" style="width: 260px;height:260px;">
+                <div id="oil_level_2" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -109,9 +109,9 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 3</dtitle>
+                <dtitle>oil_level_3</dtitle>
                 <hr>
-                <div id="water3" style="width: 260px;height:260px;">
+                <div id="oil_level_3" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -121,9 +121,9 @@
         <div class="col-sm-3 col-lg-3">
 
             <div class="dash-unit">
-                <dtitle>water level 3</dtitle>
+                <dtitle>oil_level_4</dtitle>
                 <hr>
-                <div id="water3" style="width: 260px;height:260px;">
+                <div id="oil_level_4" style="width: 260px;height:260px;">
                     
                 </div>
             </div>
@@ -131,8 +131,6 @@
         </div>
       </div><!-- /row -->
      
- 
-    
       
     </div> <!-- /container -->
 
@@ -143,96 +141,92 @@
     </script>
 
 
-
-
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart_oil_temp_1 = echarts.init(document.getElementById('oil_temp_1'));
 
-var option = {
-    tooltip : {
-        formatter: "{a} <br/>{c} {b}"
-    },
-
-    series : [
-        {
-            name:'temperature',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            radius: '100%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
+        var option_oil_temp_1 = {
+            tooltip : {
+                formatter: "{a} <br/>{c} {b}"
             },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 10,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 5
-                }
-            },
-            detail : {
 
-                offsetCenter: [0, '70%'],       // x, y，单位px
-                formatter:'{value} ℃',
+            series : [
+                {
+                    name:'temperature',
+                    type:'gauge',
+                    min:0,
+                    max:100,
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} ℃',
 
 
-            },
-            data:[{value: 40, name: ''}]
-        },
-    ]
-};
+                    },
+                    data:[{value: 40, name: ''}]
+                },
+            ]
+        };
 
-setInterval(function (){
-                //异步加载数据
-                $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
-                        myChart.setOption(option);
+        setInterval(function (){
+                        //异步加载数据
+                        $(function(){
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
+                                option_oil_temp_1.series[0].data[0].value = data.value.toFixed(1) - 0;
+                                myChart_oil_temp_1.setOption(option_oil_temp_1);
 
-                    });
-                });
-},5000)
-
-
+                            });
+                        });
+        },5000)
 
     </script>
 
@@ -241,92 +235,90 @@ setInterval(function (){
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart_oil_temp_2 = echarts.init(document.getElementById('oil_temp_2'));
 
-var option = {
-    tooltip : {
-        formatter: "{a} <br/>{c} {b}"
-    },
-
-    series : [
-        {
-            name:'temperature',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            radius: '100%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
+        var option_oil_temp_2 = {
+            tooltip : {
+                formatter: "{a} <br/>{c} {b}"
             },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 10,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 5
-                }
-            },
-            detail : {
 
-                offsetCenter: [0, '70%'],       // x, y，单位px
-                formatter:'{value} ℃',
+            series : [
+                {
+                    name:'temperature',
+                    type:'gauge',
+                    min:0,
+                    max:100,
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} ℃',
 
 
-            },
-            data:[{value: 40, name: ''}]
-        },
-    ]
-};
+                    },
+                    data:[{value: 40, name: ''}]
+                },
+            ]
+        };
 
-setInterval(function (){
-                //异步加载数据
-                $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
-                        myChart.setOption(option);
+        setInterval(function (){
+                        //异步加载数据
+                        $(function(){
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/6', function (data) {
+                                option_oil_temp_2.series[0].data[0].value = data.value.toFixed(1) - 0;
+                                option_oil_temp_2.setOption(option_oil_temp_2);
 
-                    });
-                });
-},5000)
-
-
+                            });
+                        });
+        },5000)
 
     </script>
 
@@ -335,92 +327,90 @@ setInterval(function (){
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart_oil_temp_3 = echarts.init(document.getElementById('oil_temp_3'));
 
-var option = {
-    tooltip : {
-        formatter: "{a} <br/>{c} {b}"
-    },
-
-    series : [
-        {
-            name:'temperature',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            radius: '100%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
+        var option_oil_temp_3 = {
+            tooltip : {
+                formatter: "{a} <br/>{c} {b}"
             },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 10,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 5
-                }
-            },
-            detail : {
 
-                offsetCenter: [0, '70%'],       // x, y，单位px
-                formatter:'{value} ℃',
+            series : [
+                {
+                    name:'temperature',
+                    type:'gauge',
+                    min:0,
+                    max:100,
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} ℃',
 
 
-            },
-            data:[{value: 40, name: ''}]
-        },
-    ]
-};
+                    },
+                    data:[{value: 40, name: ''}]
+                },
+            ]
+        };
 
-setInterval(function (){
-                //异步加载数据
-                $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
-                        myChart.setOption(option);
+        setInterval(function (){
+                        //异步加载数据
+                        $(function(){
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
+                                option_oil_temp_3.series[0].data[0].value = data.value.toFixed(1) - 0;
+                                myChart_oil_temp_3.setOption(option_oil_temp_3);
 
-                    });
-                });
-},5000)
-
-
+                            });
+                        });
+        },5000)
 
     </script>
 
@@ -429,92 +419,90 @@ setInterval(function (){
     
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
+        var myChart_oil_temp_4 = echarts.init(document.getElementById('oil_temp_4'));
 
-var option = {
-    tooltip : {
-        formatter: "{a} <br/>{c} {b}"
-    },
-
-    series : [
-        {
-            name:'temperature',
-            type:'gauge',
-            min:0,
-            max:100,
-            splitNumber:10,
-            radius: '100%',
-            axisLine: {            // 坐标轴线
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
-                    width: 3,
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
+        var option_oil_temp_4 = {
+            tooltip : {
+                formatter: "{a} <br/>{c} {b}"
             },
-            axisLabel: {            // 坐标轴小标记
-                textStyle: {       // 属性lineStyle控制线条样式
-                    fontWeight: 'bolder',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            axisTick: {            // 坐标轴小标记
-                length :15,        // 属性length控制线长
-                lineStyle: {       // 属性lineStyle控制线条样式
-                    color: 'auto',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            splitLine: {           // 分隔线
-                length :25,         // 属性length控制线长
-                lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
-                    width:3,
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 10
-                }
-            },
-            pointer: {           // 分隔线
-                shadowColor : '#fff', //默认透明
-                shadowBlur: 5
-            },
-            title : {
-                textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-                    fontWeight: 'bolder',
-                    fontSize: 10,
-                    fontStyle: 'italic',
-                    color: '#fff',
-                    shadowColor : '#fff', //默认透明
-                    shadowBlur: 5
-                }
-            },
-            detail : {
 
-                offsetCenter: [0, '70%'],       // x, y，单位px
-                formatter:'{value} ℃',
+            series : [
+                {
+                    name:'temperature',
+                    type:'gauge',
+                    min:0,
+                    max:100,
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.50, '#00ff00'],[0.60, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} ℃',
 
 
-            },
-            data:[{value: 40, name: ''}]
-        },
-    ]
-};
+                    },
+                    data:[{value: 40, name: ''}]
+                },
+            ]
+        };
 
-setInterval(function (){
-                //异步加载数据
-                $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
-                        option.series[0].data[0].value = data.value.toFixed(1) - 0;
-                        myChart.setOption(option);
+        setInterval(function (){
+                        //异步加载数据
+                        $(function(){
+                            $.getJSON($SCRIPT_ROOT + '/daq_value/6', function (data) {
+                                _oil_temp_4.series[0].data[0].value = data.value.toFixed(1) - 0;
+                                myChart_oil_temp_4.setOption(_oil_temp_4);
 
-                    });
-                });
-},5000)
-
-
+                            });
+                        });
+        },5000)
 
     </script>
 
@@ -523,9 +511,9 @@ setInterval(function (){
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart_water1 = echarts.init(document.getElementById('water1'));
+        var myChart_oil_level_1 = echarts.init(document.getElementById('oil_level_1'));
 
-        var option_water1 = {
+        var option_oil_level_1 = {
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}%"
             },
@@ -604,9 +592,9 @@ setInterval(function (){
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/1',function (data) {
-                        option_water1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
-                        myChart_water1.setOption(option_water1);
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/3', function (data) {
+                        option_oil_level_1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_oil_level_1.setOption(option_oil_level_1);
 
                     });
                 });
@@ -619,9 +607,9 @@ setInterval(function (){
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart_water2 = echarts.init(document.getElementById('water2'));
+        var myChart_oil_level_2 = echarts.init(document.getElementById('oil_level_2'));
 
-        var option_water2 = {
+        var option_oil_level_2 = {
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}%"
             },
@@ -700,9 +688,9 @@ setInterval(function (){
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/4',function (data) {
-                        option_water2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
-                        myChart_water2.setOption(option_water2);
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/7', function (data) {
+                        option_oil_level_2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_oil_level_2.setOption(option_oil_level_2);
 
                     });
                 });
@@ -715,9 +703,9 @@ setInterval(function (){
 
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
-        var myChart_water3 = echarts.init(document.getElementById('water3'));
+        var myChart_oil_level_3 = echarts.init(document.getElementById('oil_level_3'));
 
-        var option_water3 = {
+        var option_oil_level_3 = {
             tooltip : {
                 formatter: "{a} <br/>{b} : {c}%"
             },
@@ -796,9 +784,9 @@ setInterval(function (){
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/5',function (data) {
-                        option_water3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
-                        myChart_water3.setOption(option_water3);
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/3', function (data) {
+                        option_oil_level_3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_oil_level_3.setOption(option_oil_level_3);
 
                     });
                 });
@@ -808,6 +796,134 @@ setInterval(function (){
     </script>
 
 
+
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart_oil_level_4 = echarts.init(document.getElementById('oil_level_4'));
+
+        var option_oil_level_4 = {
+            tooltip : {
+                formatter: "{a} <br/>{b} : {c}%"
+            },
+
+            series: [
+                {
+                    name: 'temp',
+                    type: 'gauge',
+                    min:0,
+                    max:100,
+                    endAngle:35,
+
+                    splitNumber:10,
+                    radius: '100%',
+                    axisLine: {            // 坐标轴线
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: [[0.20, '#00ff00'],[0.30, '#ffff00'],[1, '#ff0000']],
+                            width: 3,
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+
+
+                    axisLabel: {            // 坐标轴小标记
+                        textStyle: {       // 属性lineStyle控制线条样式
+                            fontWeight: 'bolder',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    axisTick: {            // 坐标轴小标记
+                        length :15,        // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle控制线条样式
+                            color: 'auto',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    splitLine: {           // 分隔线
+                        length :25,         // 属性length控制线长
+                        lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                            width:3,
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 10
+                        }
+                    },
+                    pointer: {           // 分隔线
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 5
+                    },
+                    title : {
+                        textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                            fontWeight: 'bolder',
+                            fontSize: 10,
+                            fontStyle: 'italic',
+                            color: '#fff',
+                            shadowColor : '#fff', //默认透明
+                            shadowBlur: 5
+                        }
+                    },
+
+                    detail : {
+
+                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        formatter:'{value} cm',
+
+                    },
+                    data: [{value: 50, name: ''}]
+                        }
+            ]
+        };
+
+        setInterval(function () {
+                //异步加载数据
+                $(function(){
+                    $.getJSON($SCRIPT_ROOT + '/daq_value/7', function (data) {
+                        option_oil_level_4.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
+                        myChart_oil_level_4.setOption(option_oil_level_4);
+
+                    });
+                });
+
+        },5000);
+
+    </script>
+
+    <script>
+    $("#oil_temp_1").click(function(){
+        location.href='/daq_value/2';
+    });
+
+    $("#oil_temp_2").click(function(){
+        location.href='/daq_value/6';
+    });
+
+    $("#oil_temp_3").click(function(){
+        location.href='/daq_value/2';
+    });
+
+    $("#oil_temp_4").click(function(){
+        location.href='/daq_value/6';
+    });
+
+    $("#oil_level_1").click(function(){
+        location.href='/daq_value/3';
+    });
+
+    $("#oil_level_2").click(function(){
+        location.href='/daq_value/7';
+    });
+
+    $("#oil_level_3").click(function(){
+        location.href='/daq_value/3';
+    });
+
+    $("#oil_level_4").click(function(){
+        location.href='/daq_value/7';
+    });
+</script>
 
 {% endblock %}
 

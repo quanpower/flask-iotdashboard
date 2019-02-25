@@ -56,7 +56,7 @@
                 <div id="water1" style="width: 260px;height:260px;">
                     
                 </div>
-                </div>
+            </div>
         </div>
 
       <!-- DONUT CHART BLOCK -->
@@ -67,7 +67,7 @@
                 <div id="water2" style="width: 260px;height:260px;">
                     
                 </div>
-                </div>
+            </div>
         </div>
 
       <!-- DONUT CHART BLOCK -->
@@ -78,7 +78,7 @@
                 <div id="water3" style="width: 260px;height:260px;">
                     
                 </div>
-                </div>
+            </div>
         </div>
 
 
@@ -125,7 +125,7 @@
       <!-- GRAPH CHART - lineandbars.js file -->     
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-            <dtitle>Other Information</dtitle>
+            <dtitle>h5sVideo2</dtitle>
             <hr>
             <div class="h5videodiv">
                 <video class="h5video" id="h5sVideo2"  autoplay webkit-playsinline playsinline width="100%">
@@ -139,7 +139,7 @@
       <!-- LAST MONTH REVENUE -->     
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>Last Month Revenue</dtitle>
+                <dtitle>h5sVideo3</dtitle>
                 <hr>
 
             <div class="h5videodiv">
@@ -154,13 +154,13 @@
       <!-- 30 DAYS STATS - CAROUSEL FLEXSLIDER -->     
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>Last 30 Days Stats</dtitle>
+                <dtitle>Place hodler</dtitle>
                 <hr>
                 <br>
                 <br>
 
                 <div class="cont">
-                    <p>StatCounter Information</p>
+                    <p>BAK Placehodler</p>
                 </div>   
             </div>
         </div>
@@ -624,21 +624,29 @@ $('#h5sVideo3').parent().click(function () {
 
 <script>
     $("#h5sVideo1").click(function(){
-        location.href='h5video/1';
+        location.href='/h5video/1';
     });
-</script>
 
-
-<script>
     $("#h5sVideo2").click(function(){
-        location.href='h5video/2';
+        location.href='/h5video/2';
+    });
+
+    $("#h5sVideo3").click(function(){
+        location.href='/h5video/3';
+    });
+
+    $("#water1").click(function(){
+        location.href='/daq_value/1';
+    });
+
+    $("#water2").click(function(){
+        location.href='/daq_value/4';
+    });
+
+    $("#water3").click(function(){
+        location.href='/daq_value/5';
     });
 </script>
 
-<script>
-    $("#h5sVideo3").click(function(){
-        location.href='h5video/3';
-    });
-</script>
 {% endblock %}
 
