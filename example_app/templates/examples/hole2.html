@@ -594,7 +594,7 @@ var conf3 = {
 var v3 = H5sPlayerCreate(conf3);
 
 
-$('#h5sVideo1').parent().click(function () {
+$('#h5sVideo3').parent().click(function () {
     if($(this).children(".h5video").get(0).paused){
         $(this).children(".h5video").get(0).play();
         if(v3 != null)
@@ -622,6 +622,23 @@ $('#h5sVideo1').parent().click(function () {
 </script>
 
 
+<script>
+    $("#h5sVideo1").click(function(){
+        location.href='h5video/1';
+    });
+</script>
 
+
+<script>
+    $("#h5sVideo2").click(function(){
+        location.href='h5video/2';
+    });
+</script>
+
+<script>
+    $("#h5sVideo3").click(function(){
+        location.href='h5video/3';
+    });
+</script>
 {% endblock %}
 

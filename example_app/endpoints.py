@@ -747,10 +747,10 @@ def water_level(channel_id):
 
 
 @cross_origin()
-@app.route('/h5video/')
-def h5video():
+@app.route('/h5video/<video_id>')
+def h5video(video_id):
 
-    return render_template('examples/h5video.html')
+    return render_template('examples/h5video.html',video_id=video_id)
 
 
 @cross_origin()
@@ -758,7 +758,6 @@ def h5video():
 def h5video2():
 
     return render_template('examples/h5video2.html')
-
 
 
 @cross_origin()
@@ -838,19 +837,18 @@ def waring():
 
 
 @cross_origin()
-@app.route('/hole/<channel_id>')
-def hole(channel_id):
+@app.route('/hole')
+def hole():
 
-    return render_template('examples/hole2.html',channel_id=channel_id)
+    return render_template('examples/hole2.html')
 
 
 @cross_origin()
-@app.route('/oil2/<channel_id>')
-def oil(channel_id):
+@app.route('/oil')
+def oil():
     # level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
 
-    return render_template('examples/oil2.html',channel_id=channel_id)
-
+    return render_template('examples/oil2.html')
 
 
 

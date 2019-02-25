@@ -1,16 +1,28 @@
-<!DOCTYPE HTML>  
-<html>  
-<head>
-<title>H5STREAM VIDEO</title>
+{% extends "layouts/base3.html" %}
 
 
+{% block aknk_css %}
+{{ super() }}
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/font-awesome.css') }}">
+
+<link rel = "stylesheet" type = "text/css" href = "{{
+        url_for('static', filename='css/h5splayer.css') }}" />
+
+<!-- APP CSS -->
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/overrides.css') }}"> -->
+
+{% endblock %}
+
+{% block aknk_js %}
+{{ super() }}
+<!-- VENDOR JS -->
     <script type=text/javascript src="{{
-        url_for('static', filename='js/vendor/jquery.min.js') }}">
+        url_for('static', filename='js/vendor/echarts-en.min.js') }}">
     </script>
 
-    <script type=text/javascript src="{{
-        url_for('static', filename='js/vendor/bootstrap.min.js') }}">
-    </script>
     <script type=text/javascript src="{{
         url_for('static', filename='js/adapter.js') }}">
     </script>
@@ -26,42 +38,54 @@
     </script>
 
 
-<link rel = "stylesheet" type = "text/css" href = "{{
-        url_for('static', filename='css/h5splayer.css') }}" />
-
-</head>
+{% endblock %}
 
 
 
-<body> 
+{% block aknk_body %}
+{{ super() }}
 
-<div class="h5videodiv">
-    <video class="h5video" id="h5sVideo1"  autoplay webkit-playsinline playsinline>
+    <div class="container">
 
-    </video>
-    <div class="playpause" id="playpause1" ></div>
-</div>
+      <!-- FIRST ROW OF BLOCKS -->     
+      <div class="row">
 
-</body>
+        <div class="h5videodiv">
+            <video class="h5video1" id="h5sVideo3"  autoplay webkit-playsinline playsinline >
+
+            </video>
+            <div class="playpause" id="playpause1" ></div>
+        </div>
+      </div><!-- /row -->
+     
+      
+    </div> <!-- /container -->
+
+
+
+    <script type="text/javascript">
+     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
 
 <script>
 
 if (H5siOS() === true
-	|| H5sSafariBrowser() === true)
+    || H5sSafariBrowser() === true)
 {
-	$('#h5sVideo1').prop("controls", true);
+    $('#h5sVideo1').prop("controls", true);
 
 }
 
 var conf1 = {
-	videoid:'h5sVideo1',
-	protocol: window.location.protocol, //http: or https:
-	// host: window.location.host, //localhost:8080
-	host: 'localhost:8888',
-	rootpath:'/', // '/' or window.location.pathname
-	token:'token1',
-	hlsver:'v1', //v1 is for ts, v2 is for fmp4
-	session:'c1782caf-b670-42d8-ba90-2244d0b0ee83' //session got from login
+    videoid:'h5sVideo1',
+    protocol: window.location.protocol, //http: or https:
+    // host: window.location.host, //localhost:8080
+    host: 'localhost:8888',
+    rootpath:'/', // '/' or window.location.pathname
+    token:'token' + {{video_id}},
+    hlsver:'v1', //v1 is for ts, v2 is for fmp4
+    session:'c1782caf-b670-42d8-ba90-2244d0b0ee83' //session got from login
 };
 
 
@@ -69,30 +93,31 @@ var v1 = H5sPlayerCreate(conf1);
 
 
 $('#h5sVideo1').parent().click(function () {
-    if($(this).children(".h5video").get(0).paused){
-		$(this).children(".h5video").get(0).play();
-		if(v1 != null)
-		{
-			v1.disconnect();
-			delete v1;
-			v1 = null;
-		}
+    if($(this).children(".h5video1").get(0).paused){
+        $(this).children(".h5video1").get(0).play();
+        if(v1 != null)
+        {
+            v1.disconnect();
+            delete v1;
+            v1 = null;
+        }
 
-		v1 = H5sPlayerCreate(conf1);
-		
-		console.log(v1);
+        v1 = H5sPlayerCreate(conf1);
+        
+        console.log(v1);
         v1.connect();
         
         $(this).children(".playpause").fadeOut();
     }else{
-		v1.disconnect();
-		delete v1;
-		v1 = null;
-		$(this).children(".h5video").get(0).pause();
-		$(this).children(".playpause").fadeIn();
+        v1.disconnect();
+        delete v1;
+        v1 = null;
+        $(this).children(".h5video1").get(0).pause();
+        $(this).children(".playpause").fadeIn();
     }
 });
 
 </script>
 
-</html> 
+
+{% endblock %}
