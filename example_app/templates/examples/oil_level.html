@@ -100,7 +100,7 @@ var option = {
 setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/' + {{ channel_id }},function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel_history/' + {{ channel_id }},function (data) {
                         option.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart.setOption(option);
 

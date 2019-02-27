@@ -1,6 +1,11 @@
 {% extends "layouts/base3.html" %}
 
 
+{% block aknk_title %}
+{{ super() }}
+hole
+{% endblock %}
+
 {% block aknk_css %}
 {{ super() }}
 <!-- VENDOR CSS -->
@@ -51,7 +56,7 @@
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 1</dtitle>
+                <dtitle>1#地坑污水液位</dtitle>
                 <hr>
                 <div id="water1" style="width: 260px;height:260px;">
                     
@@ -62,7 +67,7 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 2</dtitle>
+                <dtitle>2#地坑污水液位</dtitle>
                 <hr>
                 <div id="water2" style="width: 260px;height:260px;">
                     
@@ -73,7 +78,7 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>water level 3</dtitle>
+                <dtitle>3#地坑污水液位</dtitle>
                 <hr>
                 <div id="water3" style="width: 260px;height:260px;">
                     
@@ -86,10 +91,10 @@
 
       <!-- LOCAL TIME BLOCK -->
             <div class="half-unit">
-                <dtitle>Local Time</dtitle>
+                <dtitle>本地时间</dtitle>
                 <hr>
                     <div class="clockcenter">
-                        <digiclock>12:45:25</digiclock>
+                        <digiclock id="localtime">12:45:25</digiclock>
                     </div>
             </div>
 
@@ -98,7 +103,8 @@
                 <dtitle>Server Uptime</dtitle>
                 <hr>
                 <div class="cont">
-                    <p><img src="images/up.png" alt=""> <bold>Up</bold> | 356ms.</p>
+                    <p><img src="{{
+        url_for('static', filename='img/up.png') }}" alt=""> <bold>Up</bold> | 1 Hour</p>
                 </div>
             </div>
 
@@ -111,7 +117,7 @@
         <div class="col-sm-3 col-lg-3">
        <!-- MAIL BLOCK -->
             <div class="dash-unit">
-            <dtitle>h5sVideo1</dtitle>
+            <dtitle>1#地坑视频</dtitle>
             <hr>
             <div class="h5videodiv">
                 <video class="h5video" id="h5sVideo1"  autoplay webkit-playsinline playsinline width="100%">
@@ -125,7 +131,7 @@
       <!-- GRAPH CHART - lineandbars.js file -->     
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-            <dtitle>h5sVideo2</dtitle>
+            <dtitle>2#地坑视频</dtitle>
             <hr>
             <div class="h5videodiv">
                 <video class="h5video" id="h5sVideo2"  autoplay webkit-playsinline playsinline width="100%">
@@ -139,7 +145,7 @@
       <!-- LAST MONTH REVENUE -->     
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>h5sVideo3</dtitle>
+                <dtitle>3#地坑视频</dtitle>
                 <hr>
 
             <div class="h5videodiv">
@@ -160,7 +166,7 @@
                 <br>
 
                 <div class="cont">
-                    <p>BAK Placehodler</p>
+                    <p class="fa-gear">BAK Placehodler</p>
                 </div>   
             </div>
         </div>
@@ -254,7 +260,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/3',function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/3',function (data) {
                         option_water1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_water1.setOption(option_water1);
 
@@ -346,7 +352,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/6',function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/6',function (data) {
                         option_water2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_water2.setOption(option_water2);
 
@@ -438,7 +444,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/7',function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/7',function (data) {
                         option_water3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_water3.setOption(option_water3);
 
@@ -632,6 +638,26 @@ $('#h5sVideo3').parent().click(function () {
     $("#water3").click(function(){
         location.href='/daq_value/7';
     });
+
+
+    function getNow(s) {
+        return s < 10 ? '0' + s: s;
+    }
+    setInterval(function () {
+        $(function() {
+            var myDate = new Date;
+            var year = myDate.getFullYear(); //获取当前年
+            var mon = myDate.getMonth() + 1; //获取当前月
+            var date = myDate.getDate(); //获取当前日
+            var h = myDate.getHours();//获取当前小时数(0-23)
+            var m = myDate.getMinutes();//获取当前分钟数(0-59)
+            var s = myDate.getSeconds();//获取当前秒
+            var week = myDate.getDay();
+            var weeks = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+            $("#localtime").html(getNow(h)+ ":" + getNow(m) + ":" + getNow(s) );
+        });
+    },1000);
+
 </script>
 
 {% endblock %}

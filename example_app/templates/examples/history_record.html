@@ -1,0 +1,206 @@
+{% extends "layouts/base3.html" %}
+
+
+{% block aknk_css %}
+{{ super() }}
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.min.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/font-awesome.css') }}">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-table.min.css') }}">
+
+
+{% endblock %}
+
+{% block aknk_js %}
+{{ super() }}
+<!-- VENDOR JS -->
+
+
+
+{% endblock %}
+
+{% block aknk_body %}
+{{ super() }}
+
+    <div class="container">
+
+      <!-- FIRST ROW OF BLOCKS -->     
+      <div class="row">
+
+      <!-- USER PROFILE BLOCK -->
+        <div class="col-sm-12 col-lg-12">
+            <div class="dash-unit">
+                <dtitle>历史记录</dtitle>
+                <hr>
+                <table id="tb_history"></table>
+                    
+                </div>
+            </div>
+        </div>
+
+      </div><!-- /row -->
+      
+      
+    </div> <!-- /container -->
+
+
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/vendor/bootstrap-table/bootstrap-table.js') }}">
+    </script>
+
+    <script type=text/javascript src="{{
+        url_for('static', filename='js/vendor/bootstrap-table/bootstrap-table-zh-CN.min.js') }}">
+    </script>
+
+     <script src="{{ url_for('static', filename='js/vendor/bootstrap-table/tableExport.js') }}""></script>
+
+      <script src="{{ url_for('static', filename='js/vendor/bootstrap-table/bootstrap-table-export.js') }}""></script>
+
+      <script src="{{ url_for('static', filename='js/vendor/bootstrap-table/libs/FileSaver/FileSaver.min.js') }}""></script>
+
+      <script src="{{ url_for('static', filename='js/vendor/bootstrap-table/libs/js-xlsx/xlsx.core.min.js') }}""></script>
+
+      <script src="{{ url_for('static', filename='js/vendor/bootstrap-table/libs/pdfmake/pdfmake.min.js') }}""></script>
+
+    <script type="text/javascript">
+      
+      $(function () {
+
+        //1.初始化Table
+        var oTable = new TableInit();
+        oTable.Init();
+
+        //2.初始化Button的点击事件
+        var oButtonInit = new ButtonInit();
+        oButtonInit.Init();
+
+      });
+
+
+      var TableInit = function () {
+          var oTableInit = new Object();
+          //初始化Table
+          oTableInit.Init = function () {
+              $('#tb_history').bootstrapTable({
+                  url: '/daq_history_record',         //请求后台的URL（*）
+                  method: 'get',                      //请求方式（*）
+                  toolbar: '#toolbar',                //工具按钮用哪个容器
+                  striped: true,                      //是否显示行间隔色
+                  cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                  pagination: true,                   //是否显示分页（*）
+                  sortable: true,                     //是否启用排序
+                  sortOrder: "asc",                   //排序方式
+                  queryParams: oTableInit.queryParams,//传递参数（*）
+                  sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
+                  // sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                  pageNumber:1,                       //初始化加载第一页，默认第一页
+                  pageSize: 10,                       //每页的记录行数（*）
+                  pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                  search: true,                       //是否显示表格搜索，此搜索是客户端搜索，不会进服务端，所以，个人感觉意义不大
+                  strictSearch: true,
+                  showColumns: true,                  //是否显示所有的列
+                  showRefresh: true,                  //是否显示刷新按钮
+                  minimumCountColumns: 2,             //最少允许的列数
+                  clickToSelect: true,                //是否启用点击选中行
+                  height: 500,                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+                  uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+                  showToggle:true,                    //是否显示详细视图和列表视图的切换按钮
+                  cardView: false,                    //是否显示详细视图
+                  detailView: false,                   //是否显示父子表
+                  showExport:true,             //是否显示导出按钮
+                  exportDataType: "all",              //basic', 'all', 'selected'.
+                  exportTypes:['excel','xlsx','csv','pdf'],     //导出类型
+
+                  columns: [{
+                      checkbox: true,
+                      visible: true 
+                  }, {
+                      field: 'id',
+                      title: '序列号',
+                      sortable: true
+                  }, {
+                      field: 'channel_id',
+                      title: '客户名称',
+                      sortable: true
+                  },{
+                      field: 'channel_name',
+                      title: '设备名称',
+                      sortable: true
+                  },{
+                      field: 'daq_value',
+                      title: '运行状态',
+                      sortable: true,
+                  },{
+                      field: 'daq_time',
+                      title: '运行状态',
+                      sortable: true,
+                  },
+                   ],
+                  // rowStyle: function (row, index) {
+                  //      var classesArr = ['success', 'info'];
+                  //      var strclass = "";
+                  //      if (index % 2 === 0) {//偶数行
+                  //          strclass = classesArr[0];
+                  //      } else {//奇数行
+                  //          strclass = classesArr[1];
+                  //      }
+                  //      return { classes: strclass };
+                  //  },//隔行变色
+                  rowStyle: function rowStyle(row, index) {
+                        var style = {};            
+                        style={css:{'color':'#ed5565'}};               
+                        return style;
+                    }
+              });
+          };
+
+          //得到查询的参数
+          oTableInit.queryParams = function (params) {
+              var temp = {   //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                  limit: params.limit,   //页面大小
+                  offset: params.offset,  //页码
+                  departmentname: $("#txt_search_departmentname").val(),
+                  statu: $("#txt_search_statu").val()
+              };
+              return temp;
+          };
+          return oTableInit;
+      };
+
+
+      var ButtonInit = function () {
+          var oInit = new Object();
+          var postdata = {};
+
+          oInit.Init = function () {
+              //初始化页面上面的按钮事件
+          };
+
+          return oInit;
+      };
+
+
+      //连接字段格式化
+      function linkFormatter(value, row, index) {                
+         return "<a href='" + value + "' title='单击打开连接' target='_blank'>" + value  + "</a>";
+      }
+
+      //操作栏的格式化
+      function actionFormatter(value, row, index) {
+          var device_id = value;
+          console.log(device_id);
+          var result = "";
+          result += "<a href=\"/equipment/device_detail/" + device_id + "\" class='btn btn-xs green' title='查看'><span class='glyphicon glyphicon-search'></span></a>";
+          result += "<a href='javascript:;' class='btn btn-xs blue' onclick=\"EditViewById('" + device_id + "')\" title='编辑'><span class='glyphicon glyphicon-pencil'></span></a>";
+          result += "<a href='javascript:;' class='btn btn-xs red' onclick=\"DeleteByIds('" + device_id + "')\" title='删除'><span class='glyphicon glyphicon-remove'></span></a>";
+
+          console.log(result)
+          return result;
+      }
+
+    </script>
+
+
+{% endblock %}
+

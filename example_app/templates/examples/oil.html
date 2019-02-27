@@ -1,11 +1,16 @@
 {% extends "layouts/base3.html" %}
 
 
+{% block aknk_title %}
+{{ super() }}
+oil
+{% endblock %}
+
 {% block aknk_css %}
 {{ super() }}
 <!-- VENDOR CSS -->
 <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/jquery-ui.min.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/font-awesome.css') }}">
+
 
 
 <!-- APP CSS -->
@@ -36,7 +41,7 @@
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>oil_temp_1</dtitle>
+                <dtitle>1#油箱温度</dtitle>
                 <hr>
                 <div id="oil_temp_1" style="width: 260px;height:260px;">
                     
@@ -47,7 +52,7 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>oil_temp_2</dtitle>
+                <dtitle>2#油箱温度</dtitle>
                 <hr>
                 <div id="oil_temp_2" style="width: 260px;height:260px;">
                     
@@ -58,7 +63,7 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>oil_temp_3</dtitle>
+                <dtitle>3#油箱温度</dtitle>
                 <hr>
                 <div id="oil_temp_3" style="width: 260px;height:260px;">
                     
@@ -70,7 +75,7 @@
         <div class="col-sm-3 col-lg-3">
 
             <div class="dash-unit">
-                <dtitle>oil_temp_4</dtitle>
+                <dtitle>4#油箱温度</dtitle>
                 <hr>
                 <div id="oil_temp_4" style="width: 260px;height:260px;">
                     
@@ -87,7 +92,7 @@
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>oil_level_1</dtitle>
+                <dtitle>1#油箱液位</dtitle>
                 <hr>
                 <div id="oil_level_1" style="width: 260px;height:260px;">
                     
@@ -98,7 +103,7 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>oil_level_2</dtitle>
+                <dtitle>2#油箱液位</dtitle>
                 <hr>
                 <div id="oil_level_2" style="width: 260px;height:260px;">
                     
@@ -109,7 +114,7 @@
       <!-- DONUT CHART BLOCK -->
         <div class="col-sm-3 col-lg-3">
             <div class="dash-unit">
-                <dtitle>oil_level_3</dtitle>
+                <dtitle>3#油箱液位</dtitle>
                 <hr>
                 <div id="oil_level_3" style="width: 260px;height:260px;">
                     
@@ -121,7 +126,7 @@
         <div class="col-sm-3 col-lg-3">
 
             <div class="dash-unit">
-                <dtitle>oil_level_4</dtitle>
+                <dtitle>4#油箱液位</dtitle>
                 <hr>
                 <div id="oil_level_4" style="width: 260px;height:260px;">
                     
@@ -215,7 +220,7 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/1', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/channel/1', function (data) {
                                 option_oil_temp_1.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_1.setOption(option_oil_temp_1);
 
@@ -303,10 +308,9 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/4', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/channel/4', function (data) {
                                 option_oil_temp_2.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_2.setOption(option_oil_temp_2);
-
                             });
                         });
         },5000)
@@ -391,7 +395,7 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/1', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/channel/1', function (data) {
                                 option_oil_temp_3.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_3.setOption(option_oil_temp_3);
 
@@ -479,10 +483,9 @@
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/daq_value/4', function (data) {
+                            $.getJSON($SCRIPT_ROOT + '/channel/4', function (data) {
                                 option_oil_temp_4.series[0].data[0].value = data.value.toFixed(1) - 0;
                                 myChart_oil_temp_4.setOption(option_oil_temp_4);
-
                             });
                         });
         },5000)
@@ -559,7 +562,7 @@
 
                     detail : {
 
-                        offsetCenter: [0, '70%'],       // x, y，单位px
+                        offsetCenter: [0, '50%'],       // x, y，单位px
                         formatter:'{value} cm',
 
                     },
@@ -571,10 +574,9 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/2', function (data) {
                         option_oil_level_1.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_1.setOption(option_oil_level_1);
-
                     });
                 });
 
@@ -663,7 +665,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/5', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/5', function (data) {
                         option_oil_level_2.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_2.setOption(option_oil_level_2);
 
@@ -755,7 +757,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/2', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/2', function (data) {
                         option_oil_level_3.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_3.setOption(option_oil_level_3);
 
@@ -847,7 +849,7 @@
         setInterval(function () {
                 //异步加载数据
                 $(function(){
-                    $.getJSON($SCRIPT_ROOT + '/daq_value/5', function (data) {
+                    $.getJSON($SCRIPT_ROOT + '/channel/5', function (data) {
                         option_oil_level_4.series[0].data[0].value = (data.value/10).toFixed(1) - 0;
                         myChart_oil_level_4.setOption(option_oil_level_4);
 

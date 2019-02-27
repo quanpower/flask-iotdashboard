@@ -711,14 +711,20 @@ def graphdata():
         graph=graphdata,
     ))
 
+@cross_origin()
+@app.route('/channel/<channel_id>')
+def channel(channel_id):
+    value = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
+
+    return jsonify(value=value.daq_value)
+
 
 
 @cross_origin()
 @app.route('/daq_value/<channel_id>')
 def daq_value(channel_id):
-    value = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
 
-    return jsonify(value=value.daq_value)
+    return render_template('examples/daq_value.html',channel_id=channel_id)
 
 
 
@@ -769,6 +775,24 @@ def h5video3():
 
 
 @cross_origin()
+@app.route('/channel_history/<channel_id>')
+def channel_history(channel_id):
+    """Fake endpoint."""
+
+    all_channels = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).limit(50).all()
+
+    channel_list = []
+    for channel in all_channels:
+        value = channel.daq_value
+        channel_list.append(value)
+        channel_list.reverse()
+
+
+    return jsonify(channel_list)
+
+
+
+@cross_origin()
 @app.route('/history_line')
 def history_line():
     """Fake endpoint."""
@@ -794,6 +818,15 @@ def history_line():
 def history_record():
     """Fake endpoint."""
 
+    return render_template('examples/history_record.html')
+
+
+
+@cross_origin()
+@app.route('/daq_history_record')
+def daq_history_record():
+    """Fake endpoint."""
+
     all_channels = DAQS.query.order_by(-DAQS.daq_time).limit(2000).all()
 
     print(all_channels)
@@ -803,6 +836,7 @@ def history_record():
         channel_list.append({
             'id':channel.id,
             'channel_id':channel.channel_id,
+            'channel_name':channel.channel_id,
             'daq_value':channel.daq_value,
             'daq_time':time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(channel.daq_time))
             })
@@ -810,6 +844,7 @@ def history_record():
     print(channel_list)
 
     return jsonify(channel_list)
+
 
 
 @cross_origin()
@@ -849,6 +884,13 @@ def oil():
     # level = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).first()
 
     return render_template('examples/oil.html')
+
+
+@cross_origin()
+@app.route('/localtime')
+def localtime():
+
+    return time.strftime("%Y-%m-%d %H:%M:%S",time.localtime(time.time()))
 
 
 

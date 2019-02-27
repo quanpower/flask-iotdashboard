@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>
         {% block title %}
-            SmartLinkCloud | {% block jsondash_title %}{% endblock %}
+            SmartLinkCloud | {% block aknk_title %}{% endblock %}
         {% endblock %}
     </title>
     <!-- VENDOR CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/bootstrap.min.css') }}">
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/font-awesome.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block aknk_css %}{% endblock %}
     {% block aknk_js %}{% endblock %}
@@ -27,7 +28,12 @@
     <div class="container-fluid" style="margin-top: 50px;" >
         <div class="row" >
             <div class="col-md-12">
-                
+                <div class="container" >
+                    <ul class="breadcrumb">
+                        <li><a href="hole">Home</a></li>
+
+                    </ul>
+                </div>
                 {% include 'layouts/smartlink_flashmessages.html' %}
 
                 {% block aknk_body %}{% endblock %}
