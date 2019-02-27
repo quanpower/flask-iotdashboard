@@ -1,0 +1,44 @@
+
+
+<script type="text/javascript">
+    
+     //setInterval配合ajax实现实时刷新前台数据的功能
+
+        setInterval(function () {
+
+            $.ajax({
+                type: "get",
+                url: "http://localhost:5004/waring",
+                success: function (msg) {
+                    if (msg.status == 1){
+                        $("#waring").html("error");
+                        $("#warning_text").html(msg.message);
+
+                        $("#waring").addClass("label label-danger");
+                        $("#waring").removeClass("label-success");
+                        $("#waring").css({"font-size":"200%"});
+
+                        var audio = $("#audio_alarm")[0];
+                        audio.play();
+
+                    }
+                    else{
+                        $("#waring").html("Running");
+                        $("#warning_text").html('');
+                        $("#waring").addClass("label label-success");
+                        $("#waring").removeClass("label-danger");
+
+                        $("#waring").css({"font-size":"200%"});
+                        var audio = $("#audio_alarm")[0];
+                        audio.pause();
+                    }
+                },
+
+                error: function (XmlHttpRequest, textStatus, errorThrown) {
+                    console.log("错误信息;" + XmlHttpRequest.status);
+                }
+            })
+        }
+, 1000)
+           
+    </script>

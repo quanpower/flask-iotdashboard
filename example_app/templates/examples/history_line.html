@@ -35,10 +35,10 @@
 
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-12 col-lg-12">
-            <div class="dash-unit">
+            <div class="dash-2-unit">
                 <dtitle>历史曲线</dtitle>
                 <hr>
-                <div id="daq_value" style="width:600px; height: 400px;" >
+                <div id="daq_value" style="width:1000px; height: 500px;" >
                     
                 </div>
             </div>
@@ -46,9 +46,6 @@
 
       </div><!-- /row -->
       
-      
-
-     
       
     </div> <!-- /container -->
 
@@ -65,33 +62,122 @@
 
         var option = {
 
-            xAxis: {
-                type: 'category',
-            },
-            yAxis: {
-                type: 'value'
-            },
-            series: [{
-                data: [820, 932, 901, 934, 1290, 1330, 1320],
-                type: 'line',
-                smooth: true
-            }]
-        };
+    tooltip: {
+        trigger: 'axis'
+    },
+    legend: {
+        data:['1#油箱温度','1#油箱液位','1#地坑污水液位','2#油箱温度','2#油箱液位','2#地坑污水液位','3#地坑污水液位']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    toolbox: {
+        feature: {
+            saveAsImage: {}
+        }
+    },
+    xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'],
+        axisLine: {
+            lineStyle: {
+                color: '#ddd', // 颜色
+                width: 3 // 粗细
+            }
+        }
+    },
+    yAxis: {
+        type: 'value',
+        axisLine:{
+            show:true,
+            lineStyle:{
+                color:'#193b4e'
+            }
+        },
+        axisTick:{
+            show:false
+        },
+        axisLabel: {
+            textStyle: {
+                color: '#b0fcff'
+            }
+        },
+        splitLine:{
+            lineStyle:{
+                color:'#053b4c'
+            }
+        }
+
+    },
+    series: [
+        {
+            name:'1#油箱温度',
+            type:'line',
+            stack: '总量',
+            data:[120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+            name:'1#油箱液位',
+            type:'line',
+            stack: '总量',
+            data:[220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+            name:'1#地坑污水液位',
+            type:'line',
+            stack: '总量',
+            data:[150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+            name:'2#油箱温度',
+            type:'line',
+            stack: '总量',
+            data:[320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+            name:'2#油箱液位',
+            type:'line',
+            stack: '总量',
+            data:[820, 932, 901, 934, 1290, 1330, 1320]
+        },
+                {
+            name:'2#地坑污水液位',
+            type:'line',
+            stack: '总量',
+            data:[820, 932, 901, 934, 1290, 1330, 1320]
+        },
+                {
+            name:'3#地坑污水液位',
+            type:'line',
+            stack: '总量',
+            data:[820, 932, 901, 934, 1290, 1330, 1320]
+        },
+    ]
+};
+
 
         setInterval(function (){
                         //异步加载数据
                         $(function(){
-                            $.getJSON($SCRIPT_ROOT + '/channel_history/'+ {{ channel_id }}, function (data) {
-                                console.log(data);
-                                option.series[0].data = data;
+                            $.getJSON($SCRIPT_ROOT + '/daq_history_line', function (data) {
+
+                                option.series[0].data = data[0].data;
+                                option.series[1].data = data[1].data;
+                                option.series[2].data = data[2].data;
+                                option.series[3].data = data[3].data;
+                                option.series[4].data = data[4].data;
+                                option.series[5].data = data[5].data;
+                                option.series[6].data = data[6].data;
                                 myChart.setOption(option);
 
                             });
                         });
         },5000);
     </script>
-
-
 
 
 {% endblock %}

@@ -796,9 +796,16 @@ def channel_history(channel_id):
 @app.route('/history_line')
 def history_line():
     """Fake endpoint."""
-    return_dict = {}
+    return render_template('examples/history_line.html')
+
+
+@cross_origin()
+@app.route('/daq_history_line')
+def daq_history_line():
+    """Fake endpoint."""
+    return_list = []
     line_name = ['line0','oil_temperature','oil_level','water_level']
-    for channel_id in range(1,4):
+    for channel_id in range(1,8):
         all_channels = DAQS.query.filter_by(channel_id=channel_id).order_by(-DAQS.daq_time).limit(50).all()
 
         channel_list = []
@@ -806,11 +813,12 @@ def history_line():
             value = channel.daq_value
             channel_list.append(value)
             channel_list.reverse()
-        return_dict[line_name[channel_id]] = channel_list
-    print(return_dict)
 
-    return jsonify(return_dict)
 
+        return_list.append({"data":channel_list})
+    print(return_list)
+
+    return jsonify(return_list)
 
 
 @cross_origin()
@@ -858,12 +866,16 @@ def waring():
     print(value_2.daq_value)
 
     value_3 = DAQS.query.filter_by(channel_id=3).order_by(-DAQS.daq_time).first()
+    value_4 = DAQS.query.filter_by(channel_id=4).order_by(-DAQS.daq_time).first()
+    value_5 = DAQS.query.filter_by(channel_id=5).order_by(-DAQS.daq_time).first()
+    value_6 = DAQS.query.filter_by(channel_id=6).order_by(-DAQS.daq_time).first()
+    value_7 = DAQS.query.filter_by(channel_id=7).order_by(-DAQS.daq_time).first()
 
 
     if value_2.daq_value > 800:
-        return_dict = {"message":"oil level  > high limit", "catgory":"error", "status":1}
+        return_dict = {"message":"警告:1#油箱液位高于上限! Warning:oil level  > high limit!", "catgory":"error", "status":1}
     elif value_2.daq_value < 600:
-        return_dict = {"message":"oil level  < low limit", "catgory":"error", "status":1}
+        return_dict = {"message":"警告:1#油箱液位低于下限! Warning:oil level  < low limit!", "catgory":"error", "status":1}
     else:
         return_dict = {"message":"alarm error", "catgory":"error", "status":0}
     print(return_dict)

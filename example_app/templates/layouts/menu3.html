@@ -7,75 +7,24 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/index.html"><img src="{{url_for('static', filename = 'img/logo.png')}}" height="30" width="30" alt="奥科宁克设施监控系统"></a>
-          <a class="navbar-brand" href="/index.html">奥科宁克设施监控系统</a>
+          <a class="navbar-brand" href="/hole">奥科宁克设施监控系统</a>
         </div> 
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="/hole"><i class="icon-home icon-white"></i> 地坑</a></li>                            
+              <li><a href="/hole"><i class="icon-home icon-white"></i> 地坑</a></li>                            
               <li><a href="/oil"><i class="icon-th icon-white"></i> 油箱</a></li>
 
               <li><a href="/history_record"><i class="icon-user icon-white"></i> 历史记录</a></li>
               <li><a href="/history_line"><i class="icon-user icon-white"></i> 历史曲线</a></li>
-
-               <li class="pull-right">
-                    <span id="waring" >Running</span>
-
-                </li>
-  
-
-              <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" autoplay >
-              </audio>
-
             </ul>
 
+  
+              <audio id="audio_alarm" src="{{ url_for('static', filename = '2981.mp3') }}" autoplay >
+              </audio>
+              
+                <div class="pull-right">
+                    <span id="waring" >Running</span>
+                </div>
           </div><!--/.nav-collapse -->
         </div>
     </div>
-
-
-
-<script type="text/javascript">
-    
-    
-     //setInterval配合ajax实现实时刷新前台数据的功能
-
-        setInterval(function () {
-
-            $.ajax({
-                type: "get",
-                url: "http://localhost:5004/waring",
-                success: function (msg) {
-                    if (msg.status == 1){
-                        $("#waring").html("error");
-                        $("#waring").addClass("label label-danger");
-                        $("#waring").removeClass("label-success");
-                        $("#waring").css({"font-size":"200%"});
-
-
-                        var audio = $("#audio_alarm")[0];
-                        audio.play();
-
-                    }
-                    else{
-                        $("#waring").html("Running");
-                        $("#waring").addClass("label label-success");
-                        $("#waring").removeClass("label-danger");
-
-                        $("#waring").css({"font-size":"200%"});
-                        var audio = $("#audio_alarm")[0];
-                        audio.pause();
-
-                    }
-                    
-                },
-
-                error: function (XmlHttpRequest, textStatus, errorThrown) {
-                    console.log("错误信息;" + XmlHttpRequest.status);
-                }
-
-            })
-
-        }
-, 1000)
-           
-    </script>

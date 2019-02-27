@@ -35,11 +35,10 @@
 
       <!-- USER PROFILE BLOCK -->
         <div class="col-sm-12 col-lg-12">
-            <div class="dash-unit">
+            <div class="dash-2-unit">
                 <dtitle>历史曲线</dtitle>
                 <hr>
-                <div id="daq_value" style="width:600px; height: 400px;" >
-                    
+                <div id="daq_value" style="width:1000px; height: 500px;" >
                 </div>
             </div>
         </div>
@@ -60,13 +59,28 @@
         var myChart = echarts.init(document.getElementById('daq_value'));
 
         var option = {
-
+            tooltip: {
+                trigger: 'axis'
+            },
             xAxis: {
                 type: 'category',
-                data:['1','2']
+                data:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50'],
+                   axisLine: {
+                        lineStyle: {
+                            color: '#ddd', // 颜色
+                            width: 3 // 粗细
+                        }
+                    }
             },
+
             yAxis: {
-                type: 'value'
+                type: 'value',
+                axisLine: {
+                        lineStyle: {
+                            color: '#ddd', // 颜色
+                            width: 3 // 粗细
+                        }
+                    }
             },
             series: [{
                 data: [820, 932, 901, 934, 1290, 1330, 1320],

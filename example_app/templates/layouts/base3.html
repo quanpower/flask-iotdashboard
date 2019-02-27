@@ -28,23 +28,22 @@
     <div class="container-fluid" style="margin-top: 50px;" >
         <div class="row" >
             <div class="col-md-12">
-                <div class="container" >
-                    <ul class="breadcrumb">
-                        <li><a href="hole">Home</a></li>
 
-                    </ul>
+                <div class="container alert alert-danger" style="background-color: #ccc">
+                        <p id="warning_text"><bold>runing</bold></p>
                 </div>
-                {% include 'layouts/smartlink_flashmessages.html' %}
-
+            </div>
+<!--                 {% include 'layouts/smartlink_flashmessages.html' %}
+ -->
+            <div class="col-md-12">
                 {% block aknk_body %}{% endblock %}
             </div>
         </div>
     </div>
 
 
-
-
 {% include 'layouts/smartlink_footer.html' %}
+{% include 'layouts/warning.html' %}
 <!-- end body -->
 
 </body>
