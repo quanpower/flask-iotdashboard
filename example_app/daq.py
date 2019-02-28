@@ -62,8 +62,12 @@ while True:
         pmin = ai_range_list[i]['pmin']
         print(pmax)
         print(pmin)
-        ai_value = round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2)
-
+        if i == 1:
+            ai_value = round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2) + 80
+        elif i == 4:
+            ai_value =round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2) + 600
+        else:
+            ai_value =round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2)
 
         insert_daq_sql='''INSERT INTO DAQS (id, channel_id,daq_value,daq_time) VALUES(null, {0},{1},{2});'''.format(i+1, ai_value, int(time.time()))
         print(insert_daq_sql)
@@ -73,16 +77,16 @@ while True:
         low_limit = ai_range_list[i]['low_limit']
 
 
-        if ai_value > high_limit:
-            insert_alarm_sql='''INSERT INTO ALARM (id, channel_id,alarm_status,alarm_msg_type,alarm_time) VALUES(null, {0},{1},{2},{3});'''.format(i+1, 1, 1, int(time.time()))
-            print(insert_alarm_sql)
-            cursor.execute(insert_alarm_sql)
-        elif ai_value < low_limit:
-            insert_alarm_sql='''INSERT INTO ALARM (id, channel_id,alarm_status,alarm_msg_type,alarm_time) VALUES(null, {0},{1},{2},{3});'''.format(i+1, 1, 0, int(time.time()))
-            print(insert_alarm_sql)
-            cursor.execute(insert_alarm_sql)
-        else:
-            print('running ok')
+        # if ai_value > high_limit:
+        #     insert_alarm_sql='''INSERT INTO ALARM (id, channel_id,alarm_status,alarm_msg_type,alarm_time) VALUES(null, {0},{1},{2},{3});'''.format(i+1, 1, 1, int(time.time()))
+        #     print(insert_alarm_sql)
+        #     cursor.execute(insert_alarm_sql)
+        # elif ai_value < low_limit:
+        #     insert_alarm_sql='''INSERT INTO ALARM (id, channel_id,alarm_status,alarm_msg_type,alarm_time) VALUES(null, {0},{1},{2},{3});'''.format(i+1, 1, 0, int(time.time()))
+        #     print(insert_alarm_sql)
+        #     cursor.execute(insert_alarm_sql)
+        # else:
+        #     print('running ok')
 
         ai_value_list.append(ai_value)
     

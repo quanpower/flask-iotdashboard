@@ -875,12 +875,21 @@ def waring():
     if value_2.daq_value > 800:
         return_dict = {"message":"警告: 350T环轧机油箱液位高于上限!    Warning: oil level  > high limit!", "catgory":"error", "status":1}
     elif value_2.daq_value < 600:
-        return_dict = {"message":"警告: 350T环轧机油箱液位油箱液位低于下限!    Warning: oil level  < low limit!", "catgory":"error", "status":1}
+        return_dict = {"message":"警告: 350T环轧机油箱液位低于下限!    Warning: oil level  < low limit!", "catgory":"error", "status":1}
     else:
-        return_dict = {"message":"alarm error", "catgory":"error", "status":0}
-    print(return_dict)
+        return_dict = {"message":"", "catgory":"error", "status":0}
+    
+    if value_5.daq_value > 800:
+        return_dict1 = {"message":"警告: 3000T压机油箱液位高于上限!    Warning: oil level  > high limit!", "catgory":"error", "status":1}
+    elif value_5.daq_value < 600:
+        return_dict1 = {"message":"警告: 3000T压机油箱液位低于下限!    Warning: oil level  < low limit!", "catgory":"error", "status":1}
+    else:
+        return_dict1 = {"message":"", "catgory":"error", "status":0}
+    
+
+    # print(return_dict)
     # return_dict = {"message":"alarm error", "catgory":"error", "status":1}
-    return jsonify(return_dict)
+    return jsonify([return_dict, return_dict1])
 
 
 @cross_origin()

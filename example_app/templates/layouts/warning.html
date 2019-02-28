@@ -10,21 +10,20 @@
                 type: "get",
                 url: "http://localhost:5004/waring",
                 success: function (msg) {
-                    if (msg.status == 1){
+                    $("#warning_text1").html(msg[0].message);
+                    $("#warning_text2").html(msg[1].message);
+                    if (msg[0].status == 1 || msg[1].status == 1){
                         $("#waring").html("error");
-                        $("#warning_text").html(msg.message);
-
                         $("#waring").addClass("label label-danger");
                         $("#waring").removeClass("label-success");
                         $("#waring").css({"font-size":"200%"});
 
                         var audio = $("#audio_alarm")[0];
                         audio.play();
-
                     }
                     else{
                         $("#waring").html("Running");
-                        $("#warning_text").html('');
+
                         $("#waring").addClass("label label-success");
                         $("#waring").removeClass("label-danger");
 
