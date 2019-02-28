@@ -836,7 +836,7 @@ def daq_history_record():
     """Fake endpoint."""
 
     all_channels = DAQS.query.order_by(-DAQS.daq_time).limit(2000).all()
-
+    channel_name_list=['350T环轧机油箱温度','350T环轧机油箱液位','350T环轧机地坑污水液位','3000T压机油箱温度','3000T压机油箱液位','3000T压机地坑污水液位','3#整形机地坑污水液位']
     print(all_channels)
     channel_list = []
     for channel in all_channels:
@@ -844,7 +844,7 @@ def daq_history_record():
         channel_list.append({
             'id':channel.id,
             'channel_id':channel.channel_id,
-            'channel_name':channel.channel_id,
+            'channel_name':channel_name_list[channel.channel_id-1],
             'daq_value':channel.daq_value,
             'daq_time':time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(channel.daq_time))
             })
