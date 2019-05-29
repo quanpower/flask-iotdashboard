@@ -63,7 +63,7 @@ while True:
         print(pmax)
         print(pmin)
         if i == 1:
-            ai_value = round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2) + 80
+            ai_value = round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2) + 180
         elif i == 4:
             ai_value =round(((pmax-pmin)/40000)*(ai_int - 10000) + pmin, 2) + 600
         else:
@@ -89,10 +89,16 @@ while True:
         #     print('running ok')
 
         ai_value_list.append(ai_value)
+
+
+    del_daq_time = int(time.time()) - 7*24*60*60
+
+    delete_daq_sql = 'delete from daqs where daq_time < {0}'.format(del_daq_time)
     
     conn.commit()
     print(ai_int_list)
     print(ai_value_list)
+
 
     time.sleep(5)
 
